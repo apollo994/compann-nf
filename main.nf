@@ -14,6 +14,8 @@ workflow {
 	// get general stats
 	GET_GFF_STATS(input_gff, params.ref)
 
+/*
+
 	// prepare gff for comparison
 	FILTER_ISOFORM(input_gff)
 	SELECT_CDS(FILTER_ISOFORM.out)
@@ -27,6 +29,8 @@ workflow {
 	EXTRACT_SEQ(input_gff, params.ref)
 	RUN_BUSCO(EXTRACT_SEQ.out, params.lineage)
 
+*/
+
 	// aggregate results
 //  AGGREGATE_STATS()
 //	AGGREGATE_GFF(GFFCOMPARE.out.collect())
@@ -38,6 +42,10 @@ process GET_GFF_STATS{
 
 	publishDir params.outputFolder
 
+	label 'agat'
+
+	container "quay.io/biocontainers/agat:1.0.0--pl5321hdfd78af_0"
+
 	input:
 	path gff
 	val ref
@@ -48,7 +56,7 @@ process GET_GFF_STATS{
 	script:
 	"""
 	mkdir -p agat_stat
-	singularity run ~/images/agat-1.2.0--pl5321hdfd78af_0.simg agat_sq_stat_basic.pl -i ${gff} -g ${ref} -o agat_stat/${gff.baseName}_agat_stat.txt
+    agat_sq_stat_basic.pl -i ${gff} -g ${ref} -o agat_stat/${gff.baseName}_agat_stat.txt
 	"""
 
 
