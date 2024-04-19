@@ -26,6 +26,7 @@ workflow {
 	EXTRACT_SEQ(input_gff, params.ref)
 	RUN_BUSCO(EXTRACT_SEQ.out, params.lineage)
 
+
 	// aggregate results
 //  AGGREGATE_STATS()
 	AGGREGATE_GFF(GFFCOMPARE.out.collect())
@@ -39,6 +40,10 @@ process GET_GFF_STATS{
 	publishDir params.outputFolder , mode: 'copy'
 
     cache 'lenient'
+
+	label 'agat'
+
+	container "quay.io/biocontainers/agat:1.0.0--pl5321hdfd78af_0"
 
 	input:
 	path gff
