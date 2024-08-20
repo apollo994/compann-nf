@@ -14,9 +14,6 @@ workflow {
 	// get general stats
 	GET_GFF_STATS(input_gff)
 
-
-/*
-
 	// run gff compare on genes containing CDS and with an 
     // exon chain longer than >200bp
     input_gff.view()
@@ -32,24 +29,21 @@ workflow {
 
 	// aggregate results
 //  AGGREGATE_STATS()
-	AGGREGATE_GFF(GFFCOMPARE.out.collect())
+	//AGGREGATE_GFF(GFFCOMPARE.out.collect())
 //	AGGREGATE_BUSCO(RUN_BUSCO.out.collect())
 
 
-*/
 
 }
 
 
 process GET_GFF_STATS{
-
-	publishDir params.outputFolder , mode: 'copy'
+    
+	
+    publishDir params.outputFolder , mode: 'copy'
 
     cache 'lenient'
-
 	label 'agat'
-
-	container "quay.io/biocontainers/agat:1.0.0--pl5321hdfd78af_0"
 
 	input:
 	path gff
@@ -60,8 +54,7 @@ process GET_GFF_STATS{
 	script:
 	"""
 	mkdir -p agat_stat
-	singularity run ~/images/agat-1.2.0--pl5321hdfd78af_0.simg \
-        agat_sq_stat_basic.pl -i ${gff} -o agat_stat/${gff.baseName}_agat_stat.txt
+	agat_sq_stat_basic.pl -i ${gff} -o agat_stat/${gff.baseName}_agat_stat.txt
 	"""
 
 
@@ -78,6 +71,7 @@ process SELECT_CDS{
 	output:
 	path "${gff.baseName}_CDS.gff3"
 
+
 	script:
 	"""
 	awk '\$3 == "CDS" || \$3 == "gene" || \$3 == "mRNA" || \$3 == "exon"' ${gff} > ${gff.baseName}_CDS.gff3
@@ -88,6 +82,7 @@ process SELECT_CDS{
 process FILTER_ISOFORM{
     
     cache 'lenient'
+    label 'agat'
     
     memory { 4.GB * task.attempt }
     errorStrategy { task.exitStatus == 140 ? 'retry' : 'terminate' }
@@ -100,15 +95,14 @@ process FILTER_ISOFORM{
 
 	script:
 	"""
-	singularity run ~/images/agat-1.2.0--pl5321hdfd78af_0.simg \
-        agat_sp_keep_longest_isoform.pl \
-        -gff ${gff} -o ${gff.baseName}_longisoforms.gff3
+	agat_sp_keep_longest_isoform.pl -gff ${gff} -o ${gff.baseName}_longisoforms.gff3
 	"""
 }
 
 process KEEP_LONG_GENE{
 	
     cache 'lenient'
+    label 'agat'
 
     memory { 4.GB * task.attempt }
     errorStrategy { task.exitStatus == 140 ? 'retry' : 'terminate' }
@@ -121,9 +115,7 @@ process KEEP_LONG_GENE{
 
 	script:
 	"""
-	singularity run ~/images/agat-1.2.0--pl5321hdfd78af_0.simg \
-        agat_sp_filter_gene_by_length.pl -gff ${gff} \
-        --size 200 --test ">" -o  ${gff.baseName}_200plus.gff3
+    agat_sp_filter_gene_by_length.pl -gff ${gff} --size 200 --test ">" -o  ${gff.baseName}_200plus.gff3
 	"""	
 
 
@@ -133,6 +125,7 @@ process KEEP_LONG_GENE{
 process GFFCOMPARE{
     
     cache 'lenient'
+    label 'gffcompare'
 
 	publishDir params.outputFolder	, mode: 'copy'
 
@@ -142,12 +135,17 @@ process GFFCOMPARE{
 	
 	output:
 	path "gffcompare_stats/${ref.baseName}.stats"	
-	
+    path "gffcompare_stats/test"
+
 	script:
 	"""
-	~/software/gffcompare/gffcompare -T -r ${ref} ${test.join(' ')} -o ${ref.baseName}
+	gffcompare -T -r ${ref} ${test.join(' ')} -o ${ref.baseName}
 	mkdir gffcompare_stats
 	cp ${ref.baseName}.stats gffcompare_stats
+    
+    which gffcompare > test
+    cp test gffcompare_stats
+
 
 	"""	
 
@@ -179,6 +177,7 @@ process AGGREGATE_GFF{
 process EXTRACT_SEQ{
 	
     cache 'lenient'
+    label 'agat'
 
 	input:
 	path gff
@@ -189,8 +188,7 @@ process EXTRACT_SEQ{
 
 	script:
 	"""
-	singularity run /nfs/users/rg/fzanarello/images/agat-1.2.0--pl5321hdfd78af_0.simg \
-        agat_sp_extract_sequences.pl \
+    agat_sp_extract_sequences.pl \
         -f ${ref} \
         -g ${gff} \
         -t CDS \
@@ -205,6 +203,7 @@ process EXTRACT_SEQ{
 process	RUN_BUSCO{
 
     cache 'lenient'
+    label 'busco'
     cpus 4
 
     publishDir params.outputFolder , mode: 'copy'
@@ -219,7 +218,7 @@ process	RUN_BUSCO{
 	script:
 	"""
 
-	singularity run /nfs/users/rg/fzanarello/images/busco-v5.5.0_cv1.simg busco \
+	busco \
         -m protein \
         -i ${prot} \
         -l ${lineage} \
