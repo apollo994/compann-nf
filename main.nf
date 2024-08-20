@@ -14,6 +14,9 @@ workflow {
 	// get general stats
 	GET_GFF_STATS(input_gff)
 
+
+/*
+
 	// run gff compare on genes containing CDS and with an 
     // exon chain longer than >200bp
     input_gff.view()
@@ -31,6 +34,9 @@ workflow {
 //  AGGREGATE_STATS()
 	AGGREGATE_GFF(GFFCOMPARE.out.collect())
 //	AGGREGATE_BUSCO(RUN_BUSCO.out.collect())
+
+
+*/
 
 }
 
