@@ -13,7 +13,8 @@ Make sure Docker and Nextflow are installed in your computer
 ```
 # clone and switch to dev branch 
 git clone https://github.com/apollo994/compann-nf.git
-git chechout dev 
+cd compann-nf
+git checkout dev
 
 # run test
 nextflow run main.nf \
