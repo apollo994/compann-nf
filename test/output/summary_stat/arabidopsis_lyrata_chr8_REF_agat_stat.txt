@@ -1,0 +1,15 @@
+Type (3rd column)	Number	Size total (kb)	Size mean (bp)	/!\Results are rounding to two decimal places 
+cds	16761	3784.74	225.81
+chromosome	1	22951.29	22951293.00
+exon	18433	4162.20	225.80
+five_prime_utr	2794	141.13	50.51
+gene	3476	7145.65	2055.71
+mrna	3476	7145.65	2055.71
+ncrna_gene	94	11.03	117.33
+pre_mirna	12	2.01	167.25
+rrna	1	0.12	119.00
+snorna	26	3.40	130.73
+snrna	21	2.95	140.29
+three_prime_utr	3096	225.30	72.77
+trna	34	2.56	75.24
+Total	48225	45578.01	945.11
