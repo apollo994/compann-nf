@@ -10,7 +10,8 @@ def get_df_from_BUSCO_res(json_res_list):
     df = pd.DataFrame()
 
     for r in json_res_list:
-        sample_name = r.split('.')[-2].replace('_CDS_BUSCO', '')
+        #sample_name = r.split('.')[-2].replace('_CDS_BUSCO', '')
+        sample_name = r.split('.')[-3]
         res_dict = extract_from_BUSCO_json(r)
 
         # get only lineage and results information
