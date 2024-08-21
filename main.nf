@@ -24,13 +24,14 @@ workflow {
 
 	// run BUSCO
 	EXTRACT_SEQ(input_gff, params.ref)
-	RUN_BUSCO(EXTRACT_SEQ.out, params.lineage)
+    DW_BUSCO_LINEAGE(params.lineage)
+	RUN_BUSCO(EXTRACT_SEQ.out, DW_BUSCO_LINEAGE.out)
 
 
 	// aggregate results
+	AGGREGATE_GFF(GFFCOMPARE.out.collect())
+	AGGREGATE_BUSCO(RUN_BUSCO.out.collect())
 //  AGGREGATE_STATS()
-	//AGGREGATE_GFF(GFFCOMPARE.out.collect())
-//	AGGREGATE_BUSCO(RUN_BUSCO.out.collect())
 
 
 
@@ -135,7 +136,7 @@ process GFFCOMPARE{
 	
 	output:
 	path "gffcompare_stats/${ref.baseName}.stats"	
-    path "gffcompare_stats/test"
+    //path "gffcompare_stats/test"
 
 	script:
 	"""
@@ -198,6 +199,25 @@ process EXTRACT_SEQ{
 
 }
 
+process DW_BUSCO_LINEAGE {
+    
+    cache 'lenient'
+    label 'busco'
+
+    input:
+    val lineage
+
+    output:
+    path "dw_lineage/lineages/${lineage}" 
+
+    script:
+    """
+    mkdir dw_lineage
+    busco --download_path dw_lineage --download ${lineage}
+    """
+
+}
+
 
 
 process	RUN_BUSCO{
@@ -213,7 +233,7 @@ process	RUN_BUSCO{
 	val lineage
 
 	output:
-	path "BUSCO_res/short_summary.specific.${lineage}.${prot.baseName}_BUSCO.json"
+	path "BUSCO_res/short_summary.specific.${lineage.baseName}.BUSCO_${prot}.json"
 	
 	script:
 	"""
@@ -222,15 +242,36 @@ process	RUN_BUSCO{
         -m protein \
         -i ${prot} \
         -l ${lineage} \
-        --download_path ${baseDir}/busco_downloads \
         --offline \
         --cpu 4 \
-        -o ${prot.baseName}_BUSCO
+        -o BUSCO_${prot}
 
 	mkdir BUSCO_res
 	
-    mv ${prot.baseName}_BUSCO/short_summary.specific.${lineage}.${prot.baseName}_BUSCO.json BUSCO_res
+    mv BUSCO_${prot}/short_summary.specific.${lineage.baseName}.BUSCO_${prot}.json BUSCO_res
 	"""
 
 }
 
+
+process AGGREGATE_BUSCO{
+    
+    cache 'lenient'
+
+    publishDir params.outputFolder , mode: 'copy'
+
+    input:
+    val BUSCO_stats
+    
+    output:
+	path "BUSCO_summary/*"
+    
+    script:
+    """
+    mkdir BUSCO_summary
+    python ${baseDir}/scripts/aggregate_BUSCO.py \
+        --busco ${BUSCO_stats.join(' ')} \
+        --out BUSCO_summary/combined_BUSCO_results.csv
+    """
+
+}
