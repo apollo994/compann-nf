@@ -1,0 +1,66 @@
+{
+    "parameters": {
+        "out_path": "/Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/c0/da672d8d44308f0b13b0c928a07f99",
+        "cpu": "4",
+        "force": "False",
+        "restart": "False",
+        "quiet": "False",
+        "download_path": "/Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/c0/da672d8d44308f0b13b0c928a07f99/busco_downloads",
+        "datasets_version": "odb10",
+        "offline": "True",
+        "download_base_url": "https://busco-data.ezlab.org/v5/data/",
+        "auto-lineage": "False",
+        "auto-lineage-prok": "False",
+        "auto-lineage-euk": "False",
+        "use_augustus": "False",
+        "use_miniprot": "False",
+        "use_metaeuk": "False",
+        "skip_bbtools": "False",
+        "batch_mode": "False",
+        "tar": "False",
+        "opt-out-run-stats": "False",
+        "in": "/Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/c0/da672d8d44308f0b13b0c928a07f99/arabidopsis_lyrata_chr8_geneidblastx_CDS.fa",
+        "out": "BUSCO_arabidopsis_lyrata_chr8_geneidblastx_CDS.fa",
+        "mode": "proteins",
+        "lineage_dataset": "/Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/02/36ad0210dc8b7ea1ccf55adea58fc1/dw_lineage/lineages/eudicots_odb10",
+        "main_out": "/Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/c0/da672d8d44308f0b13b0c928a07f99/BUSCO_arabidopsis_lyrata_chr8_geneidblastx_CDS.fa",
+        "lineage_results_dir": "run_eudicots_odb10",
+        "domain": "eukaryota",
+        "orthodb_version": "10.1"
+    },
+    "lineage_dataset": {
+        "name": "eudicotyledons_odb10",
+        "creation_date": "2024-01-08",
+        "number_of_buscos": "2326",
+        "number_of_species": "31"
+    },
+    "versions": {
+        "hmmsearch": 3.1,
+        "python": [
+            3,
+            7,
+            12,
+            "final",
+            0
+        ],
+        "busco": "5.7.0"
+    },
+    "results": {
+        "one_line_summary": "C:7.9%[S:7.6%,D:0.3%],F:2.5%,M:89.6%,n:2326",
+        "Complete percentage": 7.9,
+        "Complete BUSCOs": 183,
+        "Single copy percentage": 7.6,
+        "Single copy BUSCOs": 177,
+        "Multi copy percentage": 0.3,
+        "Multi copy BUSCOs": 6,
+        "Fragmented percentage": 2.5,
+        "Fragmented BUSCOs": 58,
+        "Missing percentage": 89.6,
+        "Missing BUSCOs": 2085,
+        "n_markers": 2326,
+        "avg_identity": null,
+        "domain": "eukaryota",
+        "internal_stop_codon_count": 0,
+        "internal_stop_codon_percent": 0
+    }
+}
