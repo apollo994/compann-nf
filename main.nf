@@ -10,7 +10,10 @@ params.outputFolder = "./output_results"
 workflow {
 
 	def input_gff = Channel.fromPath(params.gff_folder + '/*.{gff,gff3}')
-	
+    
+    // Create output structure
+    MAKE_OUT_FOLDERS()
+
 	// get general stats
 	GET_GFF_STATS(input_gff)
 
@@ -20,6 +23,7 @@ workflow {
 	SELECT_CDS(input_gff)
     FILTER_ISOFORM(SELECT_CDS.out)
 	KEEP_LONG_GENE(FILTER_ISOFORM.out)
+    GET_GFF_STATS_LONG(KEEP_LONG_GENE.out)
 	GFFCOMPARE(KEEP_LONG_GENE.out, KEEP_LONG_GENE.out.collect())
 
 	// run BUSCO
@@ -37,6 +41,23 @@ workflow {
 
 }
 
+process MAKE_OUT_FOLDERS{
+
+    publishDir params.outputFolder , mode: 'copy'
+    
+    output:
+    path BUSCO
+    path gffcompare
+    path summary_stat
+
+    script:
+    """
+    mkdir -p BUSCO
+    mkdir -p gffcompare
+    mkdir -p summary_stat
+    """
+}
+
 
 process GET_GFF_STATS{
     
@@ -50,12 +71,12 @@ process GET_GFF_STATS{
 	path gff
 	
 	output:
-	path "agat_stat/${gff.baseName}_agat_stat.txt"
+	path "summary_stat/${gff.baseName}_agat_stat.txt"
 
 	script:
 	"""
-	mkdir -p agat_stat
-	agat_sq_stat_basic.pl -i ${gff} -o agat_stat/${gff.baseName}_agat_stat.txt
+    mkdir summary_stat
+	agat_sq_stat_basic.pl -i ${gff} -o summary_stat/${gff.baseName}_agat_stat.txt
 	"""
 
 
@@ -123,6 +144,28 @@ process KEEP_LONG_GENE{
 }
 
 
+process GET_GFF_STATS_LONG{
+    
+	
+    publishDir params.outputFolder , mode: 'copy'
+
+    cache 'lenient'
+	label 'agat'
+
+	input:
+	path gff
+	
+	output:
+	path "summary_stat/${gff.baseName}_agat_stat.txt"
+
+	script:
+	"""
+    mkdir summary_stat
+	agat_sq_stat_basic.pl -i ${gff} -o summary_stat/${gff.baseName}_agat_stat.txt
+	"""
+
+}
+
 process GFFCOMPARE{
     
     cache 'lenient'
@@ -135,19 +178,13 @@ process GFFCOMPARE{
 	val test
 	
 	output:
-	path "gffcompare_stats/${ref.baseName}.stats"	
-    //path "gffcompare_stats/test"
+	path "gffcompare/all_samples/${ref.baseName}.stats"	
 
 	script:
 	"""
 	gffcompare -T -r ${ref} ${test.join(' ')} -o ${ref.baseName}
-	mkdir gffcompare_stats
-	cp ${ref.baseName}.stats gffcompare_stats
-    
-    which gffcompare > test
-    cp test gffcompare_stats
-
-
+	mkdir -p gffcompare/all_samples
+	cp ${ref.baseName}.stats gffcompare/all_samples
 	"""	
 
 }
@@ -162,14 +199,14 @@ process AGGREGATE_GFF{
     val gff_stats
     
     output:
-	path "gffcompare_summary/*"
+	path "gffcompare/summary/*"
     
     script:
     """
-    mkdir gffcompare_summary
+    mkdir -p gffcompare/summary
     python ${baseDir}/scripts/aggregate_gffcompare.py \
         --gffcompare ${gff_stats.join(' ')} \
-        --out_label gffcompare_summary/combined_gffcompare
+        --out_label gffcompare/summary/combined_gffcompare
     """
 
 }
@@ -233,7 +270,7 @@ process	RUN_BUSCO{
 	val lineage
 
 	output:
-	path "BUSCO_res/short_summary.specific.${lineage.baseName}.BUSCO_${prot}.json"
+	path "BUSCO/all_samples/short_summary.specific.${lineage.baseName}.BUSCO_${prot}.json"
 	
 	script:
 	"""
@@ -246,9 +283,9 @@ process	RUN_BUSCO{
         --cpu 4 \
         -o BUSCO_${prot}
 
-	mkdir BUSCO_res
+	mkdir -p BUSCO/all_samples
 	
-    mv BUSCO_${prot}/short_summary.specific.${lineage.baseName}.BUSCO_${prot}.json BUSCO_res
+    mv BUSCO_${prot}/short_summary.specific.${lineage.baseName}.BUSCO_${prot}.json BUSCO/all_samples
 	"""
 
 }
@@ -264,14 +301,14 @@ process AGGREGATE_BUSCO{
     val BUSCO_stats
     
     output:
-	path "BUSCO_summary/*"
+	path "BUSCO/summary/*"
     
     script:
     """
-    mkdir BUSCO_summary
+    mkdir -p BUSCO/summary
     python ${baseDir}/scripts/aggregate_BUSCO.py \
         --busco ${BUSCO_stats.join(' ')} \
-        --out BUSCO_summary/combined_BUSCO_results.csv
+        --out BUSCO/summary/combined_BUSCO_results.csv
     """
 
 }
