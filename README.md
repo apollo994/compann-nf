@@ -1,5 +1,15 @@
 # compann-nf
-A nextflow pipelane to compare and evaluate genome annotations
+A nextflow pipelane to compare and evaluate annotations of a genome assemly
+
+#### DESCRIPTION
+A genome assembly is the starting material of most genomics analaysis. To navigate and interpret the informations stored in the sequence, a genome annotatio is needed and a multitude of methods is available to generate such descriptions. Those methods, can be divided in four categories:
+- *ab initio*
+- protein similarity
+- mRNA mapping
+- genome projection
+Usually, a genome annotation combine results from more than one methos and the results are stored in [.gff3](https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md) or [.gtf](http://mblab.wustl.edu/GTF22.html), they are similar, but mind the [differencies](https://www.biobam.com/differences-between-gtf-and-gff-files-in-genomic-data-analysis/).
+
+`compann-nf` automates the task of evaluating the quality of a genome annotation according to a diverse set of metrics. 
 
 ### DEPENDENCIES
 
@@ -8,7 +18,6 @@ Make sure Docker and Nextflow are installed in your computer
   - [Nextflow](https://www.nextflow.io/docs/latest/getstarted.html#installation), tested on `nextflow version 23.10.1.5891` with `openjdk 21.0.4 2024-07-16` 
 
 ### Test Run
-
 
 ```
 # clone and switch to dev branch 
