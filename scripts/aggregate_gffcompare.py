@@ -1,6 +1,5 @@
 import pandas as pd
 import argparse
-import seaborn as sns
 
 def get_samples_dictionary(file_path):   
     sample_dictionary = {}       
@@ -119,18 +118,6 @@ def get_matrix(large_df, metric):
             res_df = res_df[res_df.columns].astype(float)
     
     return res_df
-
-# def print_heatmap(matrix, metric):
-
-#     g = sns.clustermap(matrix,
-#                    annot=True,
-#                    fmt=".1f",
-#                    annot_kws={"size": 18}
-#                    )
-
-#     g.ax_heatmap.tick_params(labelsize=18)
-#     g.ax_heatmap.set_title(metric, size = 28, y = 1.3)
-#     g.savefig(f"{metric}.png") 
 
 
 def main():
