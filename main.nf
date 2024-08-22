@@ -192,7 +192,8 @@ process GFFCOMPARE{
 process AGGREGATE_GFF{
     
     cache 'lenient'
-
+    label 'python'
+    
     publishDir params.outputFolder , mode: 'copy'
 
     input:
@@ -204,7 +205,8 @@ process AGGREGATE_GFF{
     script:
     """
     mkdir -p gffcompare/summary
-    python ${baseDir}/scripts/aggregate_gffcompare.py \
+    hostname     
+    python ${baseDir}/bin/aggregate_gffcompare.py \
         --gffcompare ${gff_stats.join(' ')} \
         --out_label gffcompare/summary/combined_gffcompare
     """
@@ -294,6 +296,7 @@ process	RUN_BUSCO{
 process AGGREGATE_BUSCO{
     
     cache 'lenient'
+    label 'python'
 
     publishDir params.outputFolder , mode: 'copy'
 
@@ -306,7 +309,7 @@ process AGGREGATE_BUSCO{
     script:
     """
     mkdir -p BUSCO/summary
-    python ${baseDir}/scripts/aggregate_BUSCO.py \
+    python ${baseDir}/bin/aggregate_BUSCO.py \
         --busco ${BUSCO_stats.join(' ')} \
         --out BUSCO/summary/combined_BUSCO_results.csv
     """
