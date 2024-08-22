@@ -2,7 +2,7 @@
 A nextflow pipelane to compare and evaluate annotations of a genome assemly
 
 #### DESCRIPTION
-A genome assembly is the starting material of most genomics analaysis. To navigate and interpret the informations stored in the sequence, a genome annotatio is needed and a multitude of methods is available to generate such descriptions. Those methods, can be divided in four categories:
+A genome assembly is the starting material of most genomics analayses. To navigate and interpret the informations stored in the sequence, a genome annotatio is needed and a multitude of methods is available to generate such descriptions. Those methods, can be divided in four categories:
 - *ab initio*
 - protein similarity
 - mRNA mapping
