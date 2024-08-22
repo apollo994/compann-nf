@@ -1,7 +1,4 @@
 # compann-nf
 A nextflow pipelane to compare and evaluate genome annotations
 
-Run the pipeline with
-```
-nexflow run main.nf
-```
+Switch to [dev](https://github.com/apollo994/compann-nf/tree/dev) branch for a working version
