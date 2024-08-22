@@ -1,5 +1,5 @@
-,arabidopsis_lyrata_chr8_helixer,arabidopsis_lyrata_chr8_geneidblastx,arabidopsis_lyrata_chr8_REF,arabidopsis_lyrata_chr8_geneid
-arabidopsis_lyrata_chr8_helixer,100.0,76.4,92.7,61.0
-arabidopsis_lyrata_chr8_geneidblastx,52.6,100.0,63.9,53.3
-arabidopsis_lyrata_chr8_REF,70.1,70.2,100.0,52.9
-arabidopsis_lyrata_chr8_geneid,69.4,88.1,79.6,100.0
+,arabidopsis_lyrata_chr8_REF,arabidopsis_lyrata_chr8_helixer,arabidopsis_lyrata_chr8_geneidblastx,arabidopsis_lyrata_chr8_geneid
+arabidopsis_lyrata_chr8_REF,100.0,70.1,70.2,52.9
+arabidopsis_lyrata_chr8_helixer,92.7,100.0,76.4,61.0
+arabidopsis_lyrata_chr8_geneidblastx,63.9,52.6,100.0,53.3
+arabidopsis_lyrata_chr8_geneid,79.6,69.4,88.1,100.0

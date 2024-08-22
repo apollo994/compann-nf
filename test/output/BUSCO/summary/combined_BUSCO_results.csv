@@ -1,15 +1,15 @@
-metric,BUSCO_arabidopsis_lyrata_chr8_REF_CDS,BUSCO_arabidopsis_lyrata_chr8_helixer_CDS,BUSCO_arabidopsis_lyrata_chr8_geneidblastx_CDS,BUSCO_arabidopsis_lyrata_chr8_geneid_CDS
-one_line_summary,"C:12.6%[S:12.2%,D:0.4%],F:0.3%,M:87.1%,n:2326","C:12.7%[S:12.3%,D:0.4%],F:0.5%,M:86.8%,n:2326","C:7.9%[S:7.6%,D:0.3%],F:2.5%,M:89.6%,n:2326","C:10.1%[S:9.7%,D:0.4%],F:1.9%,M:88.0%,n:2326"
-Complete percentage,12.6,12.7,7.9,10.1
-Complete BUSCOs,293,296,183,236
-Single copy percentage,12.2,12.3,7.6,9.7
-Single copy BUSCOs,283,287,177,226
-Multi copy percentage,0.4,0.4,0.3,0.4
-Multi copy BUSCOs,10,9,6,10
-Fragmented percentage,0.3,0.5,2.5,1.9
-Fragmented BUSCOs,8,12,58,45
-Missing percentage,87.1,86.8,89.6,88.0
-Missing BUSCOs,2025,2018,2085,2045
+metric,BUSCO_arabidopsis_lyrata_chr8_REF_CDS,BUSCO_arabidopsis_lyrata_chr8_geneid_CDS,BUSCO_arabidopsis_lyrata_chr8_helixer_CDS,BUSCO_arabidopsis_lyrata_chr8_geneidblastx_CDS
+one_line_summary,"C:12.6%[S:12.2%,D:0.4%],F:0.3%,M:87.1%,n:2326","C:10.1%[S:9.7%,D:0.4%],F:1.9%,M:88.0%,n:2326","C:12.7%[S:12.3%,D:0.4%],F:0.5%,M:86.8%,n:2326","C:7.9%[S:7.6%,D:0.3%],F:2.5%,M:89.6%,n:2326"
+Complete percentage,12.6,10.1,12.7,7.9
+Complete BUSCOs,293,236,296,183
+Single copy percentage,12.2,9.7,12.3,7.6
+Single copy BUSCOs,283,226,287,177
+Multi copy percentage,0.4,0.4,0.4,0.3
+Multi copy BUSCOs,10,10,9,6
+Fragmented percentage,0.3,1.9,0.5,2.5
+Fragmented BUSCOs,8,45,12,58
+Missing percentage,87.1,88.0,86.8,89.6
+Missing BUSCOs,2025,2045,2018,2085
 n_markers,2326,2326,2326,2326
 avg_identity,,,,
 domain,eukaryota,eukaryota,eukaryota,eukaryota
