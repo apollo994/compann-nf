@@ -7,17 +7,23 @@ A genome assembly is the starting material of most genomics analaysis. To naviga
 - protein similarity
 - mRNA mapping
 - genome projection
+
 Usually, a genome annotation combine results from more than one methos and the results are stored in [.gff3](https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md) or [.gtf](http://mblab.wustl.edu/GTF22.html), they are similar, but mind the [differencies](https://www.biobam.com/differences-between-gtf-and-gff-files-in-genomic-data-analysis/).
 
-`compann-nf` automates the task of evaluating the quality of a genome annotation according to a diverse set of metrics. 
+`compann-nf` automates the task of evaluating the quality of a genome annotation according to a diverse set of metrics. It is based on the nextflow technology to orchestarte and parallelize processes, while reproducibility is ensured by running each process inside a Docker (or Singularity) container. 
+You should consider using `compann-nf` when you want to know what annotation methods or pipeline parameter provide the most complete and accurate annotation. 
 
-### DEPENDENCIES
+### HOW TO USE `compann-nf`
+
+## Dependencies
 
 Make sure Docker and Nextflow are installed in your computer
   - [Docker](https://docs.docker.com/engine/install/), tested on `Docker version 24.0.7, build afdd53b`
   - [Nextflow](https://www.nextflow.io/docs/latest/getstarted.html#installation), tested on `nextflow version 23.10.1.5891` with `openjdk 21.0.4 2024-07-16` 
 
-### Test Run
+## Test Run
+
+If you have Docker and Nextflow installed on you system you are ready to go
 
 ```
 # clone and switch to dev branch 
@@ -35,4 +41,6 @@ nextflow run main.nf \
 
 The test takes ~5 minutes to run on an M3 chip.   
 The reference must be passed as absolute path, I'm working to fix this. 
+
+### Run 
 
