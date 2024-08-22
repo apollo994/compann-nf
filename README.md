@@ -8,7 +8,7 @@ A genome assembly is the starting material of most genomics analayses. To naviga
 - mRNA mapping
 - genome projection
 
-Usually, a genome annotation combine results from more than one methos and the results are stored in [.gff3](https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md) or [.gtf](http://mblab.wustl.edu/GTF22.html), they are similar, but mind the [differencies](https://www.biobam.com/differences-between-gtf-and-gff-files-in-genomic-data-analysis/).
+Usually, a genome annotation combines results from more than one methos and the gene models are stored in [.gff3](https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md) or [.gtf](http://mblab.wustl.edu/GTF22.html), they are similar, but mind the [differencies](https://www.biobam.com/differences-between-gtf-and-gff-files-in-genomic-data-analysis/).
 
 `compann-nf` automates the task of evaluating the quality of a genome annotation according to a diverse set of metrics. It is based on the nextflow technology to orchestarte and parallelize processes, while reproducibility is ensured by running each process inside a Docker (or Singularity) container. 
 You should consider using `compann-nf` when you want to know what annotation methods or pipeline parameter provide the most complete and accurate annotation. 
