@@ -35,7 +35,7 @@ workflow {
 	// aggregate results
 	AGGREGATE_GFF(GFFCOMPARE.out.collect())
 	AGGREGATE_BUSCO(RUN_BUSCO.out.collect())
-//  AGGREGATE_STATS()
+    AGGREGATE_STATS(GET_GFF_STATS.out.collect(),GET_GFF_STATS_LONG.out.collect()) 
 
 
 
@@ -71,12 +71,12 @@ process GET_GFF_STATS{
 	path gff
 	
 	output:
-	path "summary_stat/${gff.baseName}_agat_stat.txt"
+	path "summary_stat/full/${gff.baseName}_agat_stat.txt"
 
 	script:
 	"""
-    mkdir summary_stat
-	agat_sq_stat_basic.pl -i ${gff} -o summary_stat/${gff.baseName}_agat_stat.txt
+    mkdir -p summary_stat/full
+	agat_sq_stat_basic.pl -i ${gff} -o summary_stat/full/${gff.baseName}_agat_stat.txt
 	"""
 
 
@@ -140,7 +140,6 @@ process KEEP_LONG_GENE{
     agat_sp_filter_gene_by_length.pl -gff ${gff} --size 200 --test ">" -o  ${gff.baseName}_200plus.gff3
 	"""	
 
-
 }
 
 
@@ -156,12 +155,12 @@ process GET_GFF_STATS_LONG{
 	path gff
 	
 	output:
-	path "summary_stat/${gff.baseName}_agat_stat.txt"
+	path "summary_stat/long/${gff.baseName}_agat_stat.txt"
 
 	script:
 	"""
-    mkdir summary_stat
-	agat_sq_stat_basic.pl -i ${gff} -o summary_stat/${gff.baseName}_agat_stat.txt
+    mkdir -p summary_stat/long
+	agat_sq_stat_basic.pl -i ${gff} -o summary_stat/long/${gff.baseName}_agat_stat.txt
 	"""
 
 }
@@ -258,7 +257,6 @@ process DW_BUSCO_LINEAGE {
 }
 
 
-
 process	RUN_BUSCO{
 
     cache 'lenient'
@@ -304,7 +302,7 @@ process AGGREGATE_BUSCO{
     val BUSCO_stats
     
     output:
-	path "BUSCO/summary/*"
+	path "BUSCO/summary/combined_BUSCO_results.csv"
     
     script:
     """
@@ -313,5 +311,27 @@ process AGGREGATE_BUSCO{
         --busco ${BUSCO_stats.join(' ')} \
         --out BUSCO/summary/combined_BUSCO_results.csv
     """
+}
 
+process AGGREGATE_STATS{
+    
+    cache 'lenient'
+    label 'python'
+
+    publishDir params.outputFolder , mode: 'copy'
+
+    input:
+    val full_stats
+    val long_stats
+    
+    output:
+	path "summary_stat/summary_stats_combined.csv"
+    
+    script:
+    """
+    mkdir -p summary_stat
+    python ${baseDir}/bin/aggregate_stats.py \
+        --stats ${full_stats.join(' ')} ${long_stats.join(' ')} \
+        --out summary_stat/summary_stats_combined.csv
+    """
 }
