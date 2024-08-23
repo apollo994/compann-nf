@@ -41,4 +41,3 @@ nextflow run main.nf \
 The test takes ~5 minutes to run on an M3 chip.   
 The reference must be passed as absolute path, I'm working to fix this. 
 
-
