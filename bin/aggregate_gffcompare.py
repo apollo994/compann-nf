@@ -4,11 +4,11 @@ import argparse
 def get_samples_dictionary(file_path):   
     sample_dictionary = {}       
     with open(file_path, 'r') as file:        
-        ref_name = file_path.split('/')[-1].replace('_CDS_longisoforms_200plus.stats','')
+        ref_name = file_path.split('/')[-1].replace('_longisoforms_200plus_basicelements.stats','')
         
         for line in file:
             if line.startswith('#= Summary for dataset:'):                
-                sample_name = line.split('/')[-1].split('_CDS_longisoforms_200plus')[0]
+                sample_name = line.split('/')[-1].split('_longisoforms_200plus_basicelements')[0]
                 comparison_name = f'{ref_name}_vs_{sample_name}'
                 sample_dictionary[comparison_name] = []
                 for _ in range(18):
@@ -87,7 +87,7 @@ def combine_gffcompare_res(gffcompare_stats_list):
     
     for f in gffcompare_stats_list:
         
-        sample_name = f.split('/')[-1].replace('_CDS_longisoforms_200plus.stats','')       
+        sample_name = f.split('/')[-1].replace('_longisoforms_200plus_basicelements.stats','')       
         samples_dict = get_samples_dictionary(f)
         column_to_add = pd.DataFrame()
         
@@ -130,13 +130,13 @@ def main():
     large_df = combine_gffcompare_res(args.gffcompare)
     large_df.to_csv(f'{args.out_label}_extend.tsv', index_label='metric')
     
-    for m in ['base_level_Se',
-              'base_level_Pr',
-              'transcript_level_Se',
-              'transcript_level_Pr']:
-        
-        metric_matrix = get_matrix(large_df, m)
-        metric_matrix.to_csv(f'{args.out_label}_{m}.csv')
+#    for m in ['base_level_Se',
+#              'base_level_Pr',
+#              'transcript_level_Se',
+#              'transcript_level_Pr']:
+#        
+#        metric_matrix = get_matrix(large_df, m)
+#        metric_matrix.to_csv(f'{args.out_label}_{m}.csv')
 
 
 if __name__ == "__main__":
