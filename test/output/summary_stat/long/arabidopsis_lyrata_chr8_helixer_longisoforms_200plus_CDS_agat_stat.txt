@@ -1,5 +1,0 @@
-Type (3rd column)	Number	Size total (kb)	Size mean (bp)	/!\Results are rounding to two decimal places 
-exon	19286	5472.62	283.76
-gene	3687	8173.71	2216.90
-mrna	3687	8173.71	2216.90
-Total	26660	21820.05	818.46

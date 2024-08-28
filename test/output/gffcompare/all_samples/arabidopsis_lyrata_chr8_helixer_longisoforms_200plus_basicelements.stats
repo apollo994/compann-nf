@@ -1,56 +1,8 @@
 # gffcompare v0.12.6 | Command line was:
-#gffcompare -T -r arabidopsis_lyrata_chr8_helixer_longisoforms_200plus_basicelements.gff3 /Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/21/630cb60ac2d39ab93512a425bbf2a4/arabidopsis_lyrata_chr8_geneid_longisoforms_200plus.gff3 /Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/6b/bf1b8b57a4e45e0a0da7bd5d17cb83/arabidopsis_lyrata_chr8_REF_longisoforms_200plus.gff3 /Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/18/720377bbca1b66ee1eff58522610cc/arabidopsis_lyrata_chr8_helixer_longisoforms_200plus.gff3 /Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/d9/ba766a8be958dc24d7e322338cc798/arabidopsis_lyrata_chr8_geneidblastx_longisoforms_200plus.gff3 -o arabidopsis_lyrata_chr8_helixer_longisoforms_200plus_basicelements
+#gffcompare -T -r arabidopsis_lyrata_chr8_helixer_longisoforms_200plus_basicelements.gff3 /Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/ee/ce4452ab22004d39874ae02c5ee5f6/arabidopsis_lyrata_chr8_helixer_longisoforms_200plus_basicelements.gff3 /Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/84/89ef59407d94feaf0485bdd7ff0e11/arabidopsis_lyrata_chr8_geneid_longisoforms_200plus_basicelements.gff3 /Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/4f/85307eedaa0a667ed657a8a6f9c210/arabidopsis_lyrata_chr8_geneidblastx_longisoforms_200plus_basicelements.gff3 /Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/2f/73c35b75dc137e15b954f9bd3af1a1/arabidopsis_lyrata_chr8_REF_longisoforms_200plus_basicelements.gff3 -o arabidopsis_lyrata_chr8_helixer_longisoforms_200plus_basicelements
 #
 
-#= Summary for dataset: /Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/21/630cb60ac2d39ab93512a425bbf2a4/arabidopsis_lyrata_chr8_geneid_longisoforms_200plus.gff3 
-#     Query mRNAs :    4433 in    4433 loci  (3690 multi-exon transcripts)
-#            (0 multi-transcript loci, ~1.0 transcripts per locus)
-# Reference mRNAs :    3687 in    3687 loci  (3037 multi-exon)
-# Super-loci w/ reference transcripts:     2824
-#-----------------| Sensitivity | Precision  |
-        Base level:    69.4     |    61.0    |
-        Exon level:    44.0     |    39.9    |
-      Intron level:    57.1     |    53.0    |
-Intron chain level:    14.9     |    12.2    |
-  Transcript level:    12.2     |    10.2    |
-       Locus level:    12.2     |    10.2    |
-
-     Matching intron chains:     451
-       Matching transcripts:     451
-              Matching loci:     451
-
-          Missed exons:    4547/19286	( 23.6%)
-           Novel exons:    6399/21232	( 30.1%)
-        Missed introns:    1562/15599	( 10.0%)
-         Novel introns:    4801/16799	( 28.6%)
-           Missed loci:     222/3687	(  6.0%)
-            Novel loci:    1555/4433	( 35.1%)
-
-#= Summary for dataset: /Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/6b/bf1b8b57a4e45e0a0da7bd5d17cb83/arabidopsis_lyrata_chr8_REF_longisoforms_200plus.gff3 
-#     Query mRNAs :    3434 in    3430 loci  (2839 multi-exon transcripts)
-#            (3 multi-transcript loci, ~1.0 transcripts per locus)
-# Reference mRNAs :    3687 in    3687 loci  (3037 multi-exon)
-# Super-loci w/ reference transcripts:     2912
-#-----------------| Sensitivity | Precision  |
-        Base level:    70.1     |    92.7    |
-        Exon level:    52.8     |    56.0    |
-      Intron level:    70.0     |    74.0    |
-Intron chain level:    24.7     |    26.4    |
-  Transcript level:    20.3     |    21.8    |
-       Locus level:    20.3     |    21.8    |
-
-     Matching intron chains:     749
-       Matching transcripts:     749
-              Matching loci:     749
-
-          Missed exons:    3896/19286	( 20.2%)
-           Novel exons:    1564/18198	(  8.6%)
-        Missed introns:    2753/15599	( 17.6%)
-         Novel introns:    2251/14763	( 15.2%)
-           Missed loci:     594/3687	( 16.1%)
-            Novel loci:     467/3430	( 13.6%)
-
-#= Summary for dataset: /Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/18/720377bbca1b66ee1eff58522610cc/arabidopsis_lyrata_chr8_helixer_longisoforms_200plus.gff3 
+#= Summary for dataset: /Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/ee/ce4452ab22004d39874ae02c5ee5f6/arabidopsis_lyrata_chr8_helixer_longisoforms_200plus_basicelements.gff3 
 #     Query mRNAs :    3687 in    3687 loci  (3037 multi-exon transcripts)
 #            (0 multi-transcript loci, ~1.0 transcripts per locus)
 # Reference mRNAs :    3687 in    3687 loci  (3037 multi-exon)
@@ -74,7 +26,31 @@ Intron chain level:   100.0     |   100.0    |
            Missed loci:       0/3687	(  0.0%)
             Novel loci:       0/3687	(  0.0%)
 
-#= Summary for dataset: /Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/d9/ba766a8be958dc24d7e322338cc798/arabidopsis_lyrata_chr8_geneidblastx_longisoforms_200plus.gff3 
+#= Summary for dataset: /Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/84/89ef59407d94feaf0485bdd7ff0e11/arabidopsis_lyrata_chr8_geneid_longisoforms_200plus_basicelements.gff3 
+#     Query mRNAs :    4433 in    4433 loci  (3690 multi-exon transcripts)
+#            (0 multi-transcript loci, ~1.0 transcripts per locus)
+# Reference mRNAs :    3687 in    3687 loci  (3037 multi-exon)
+# Super-loci w/ reference transcripts:     2824
+#-----------------| Sensitivity | Precision  |
+        Base level:    69.4     |    61.0    |
+        Exon level:    44.0     |    39.9    |
+      Intron level:    57.1     |    53.0    |
+Intron chain level:    14.9     |    12.2    |
+  Transcript level:    12.2     |    10.2    |
+       Locus level:    12.2     |    10.2    |
+
+     Matching intron chains:     451
+       Matching transcripts:     451
+              Matching loci:     451
+
+          Missed exons:    4547/19286	( 23.6%)
+           Novel exons:    6399/21232	( 30.1%)
+        Missed introns:    1562/15599	( 10.0%)
+         Novel introns:    4801/16799	( 28.6%)
+           Missed loci:     222/3687	(  6.0%)
+            Novel loci:    1555/4433	( 35.1%)
+
+#= Summary for dataset: /Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/4f/85307eedaa0a667ed657a8a6f9c210/arabidopsis_lyrata_chr8_geneidblastx_longisoforms_200plus_basicelements.gff3 
 #     Query mRNAs :    2849 in    2849 loci  (2456 multi-exon transcripts)
 #            (0 multi-transcript loci, ~1.0 transcripts per locus)
 # Reference mRNAs :    3687 in    3687 loci  (3037 multi-exon)
@@ -97,6 +73,30 @@ Intron chain level:     4.3     |     5.4    |
          Novel introns:    1717/10246	( 16.8%)
            Missed loci:     956/3687	( 25.9%)
             Novel loci:     416/2849	( 14.6%)
+
+#= Summary for dataset: /Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/2f/73c35b75dc137e15b954f9bd3af1a1/arabidopsis_lyrata_chr8_REF_longisoforms_200plus_basicelements.gff3 
+#     Query mRNAs :    3434 in    3430 loci  (2839 multi-exon transcripts)
+#            (3 multi-transcript loci, ~1.0 transcripts per locus)
+# Reference mRNAs :    3687 in    3687 loci  (3037 multi-exon)
+# Super-loci w/ reference transcripts:     2912
+#-----------------| Sensitivity | Precision  |
+        Base level:    70.1     |    92.7    |
+        Exon level:    52.8     |    56.0    |
+      Intron level:    70.0     |    74.0    |
+Intron chain level:    24.7     |    26.4    |
+  Transcript level:    20.3     |    21.8    |
+       Locus level:    20.3     |    21.8    |
+
+     Matching intron chains:     749
+       Matching transcripts:     749
+              Matching loci:     749
+
+          Missed exons:    3896/19286	( 20.2%)
+           Novel exons:    1564/18198	(  8.6%)
+        Missed introns:    2753/15599	( 17.6%)
+         Novel introns:    2251/14763	( 15.2%)
+           Missed loci:     594/3687	( 16.1%)
+            Novel loci:     467/3430	( 13.6%)
 
  Total union super-loci across all input datasets: 4370 
   (2491 multi-transcript, ~3.0 transcripts per locus)
