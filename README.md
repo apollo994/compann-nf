@@ -41,3 +41,9 @@ nextflow run main.nf \
 The test takes ~5 minutes to run on an M3 chip.   
 The reference must be passed as absolute path, I'm working to fix this. 
 
+## Modules
+#### General statistics
+This module provides information 
+It is run twice, on the input annotation as they are and after preparing them for the `GFF compare` step.
+#### GFF compare
+#### BUSCO analyis
