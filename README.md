@@ -43,7 +43,15 @@ The reference must be passed as absolute path, I'm working to fix this.
 
 ## Modules
 #### General statistics
-This module provides information 
-It is run twice, on the input annotation as they are and after preparing them for the `GFF compare` step.
+This module provides information about the models and their substructures.
+It is run twice, (1) on the input annotation as they are and (2) after preparing them for the `GFF compare` step.
 #### GFF compare
+Gff compare provides accuracy (precision and recall) metrics in relation to a reference annotation. This test is performed only on gene, mRNA and exon features, all the ot  
+Compann-nf is taught to work with and without reference. Each annotation is used as reference and all the others as queries, the process is repeated for all input annotation. The result is an accuracy matrix to provide an overview of the most similar annotation. When a reference is provided, this would be the most relevant comparison.     
+
 #### BUSCO analyis
+BUSCO provides a measure of completeness based on the presence/absence of genes expected in the phylogenetic group of the species in the analysis. 
+
+
+
+

@@ -1,11 +1,11 @@
 {
     "parameters": {
-        "out_path": "/Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/15/1aba67ff2b343086022a63f2e7b7d5",
+        "out_path": "/Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/ab/27299560c343c90d1692707b7979dd",
         "cpu": "4",
         "force": "False",
         "restart": "False",
         "quiet": "False",
-        "download_path": "/Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/15/1aba67ff2b343086022a63f2e7b7d5/busco_downloads",
+        "download_path": "/Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/ab/27299560c343c90d1692707b7979dd/busco_downloads",
         "datasets_version": "odb10",
         "offline": "True",
         "download_base_url": "https://busco-data.ezlab.org/v5/data/",
@@ -19,11 +19,11 @@
         "batch_mode": "False",
         "tar": "False",
         "opt-out-run-stats": "False",
-        "in": "/Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/15/1aba67ff2b343086022a63f2e7b7d5/arabidopsis_lyrata_chr8_geneid_CDS.fa",
+        "in": "/Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/ab/27299560c343c90d1692707b7979dd/arabidopsis_lyrata_chr8_geneid_CDS.fa",
         "out": "BUSCO_arabidopsis_lyrata_chr8_geneid_CDS.fa",
         "mode": "proteins",
-        "lineage_dataset": "/Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/d5/1fc8dcffffc8a6e08854ae3e34c8ca/dw_lineage/lineages/eudicots_odb10",
-        "main_out": "/Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/15/1aba67ff2b343086022a63f2e7b7d5/BUSCO_arabidopsis_lyrata_chr8_geneid_CDS.fa",
+        "lineage_dataset": "/Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/d1/ae37aec59a366ee4c0de5fb3a2d145/dw_lineage/lineages/eudicots_odb10",
+        "main_out": "/Users/fzanarello/Library/CloudStorage/OneDrive-CRG-CentredeRegulacioGenomica/work/projects/compann-nf/work/ab/27299560c343c90d1692707b7979dd/BUSCO_arabidopsis_lyrata_chr8_geneid_CDS.fa",
         "lineage_results_dir": "run_eudicots_odb10",
         "domain": "eukaryota",
         "orthodb_version": "10.1"
