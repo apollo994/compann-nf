@@ -4,11 +4,11 @@ import argparse
 def get_samples_dictionary(file_path):   
     sample_dictionary = {}       
     with open(file_path, 'r') as file:        
-        ref_name = file_path.split('/')[-1].replace('_CDS_longisoforms_200plus.stats','')
+        ref_name = file_path.split('/')[-1].replace('_longisoforms_200plus_basicelements.stats','')
         
         for line in file:
             if line.startswith('#= Summary for dataset:'):                
-                sample_name = line.split('/')[-1].split('_CDS_longisoforms_200plus')[0]
+                sample_name = line.split('/')[-1].split('_longisoforms_200plus_basicelements')[0]
                 comparison_name = f'{ref_name}_vs_{sample_name}'
                 sample_dictionary[comparison_name] = []
                 for _ in range(18):
@@ -87,16 +87,15 @@ def combine_gffcompare_res(gffcompare_stats_list):
     
     for f in gffcompare_stats_list:
         
-        sample_name = f.split('/')[-1].replace('_CDS_longisoforms_200plus.stats','')       
+        sample_name = f.split('/')[-1].replace('_longisoforms_200plus_basicelements.stats','')       
         samples_dict = get_samples_dictionary(f)
         column_to_add = pd.DataFrame()
         
         for comparison in samples_dict:
             
             comparison_dict = parse_single_comparison(samples_dict[comparison])
-            comparison_dict = {f'{comparison}_{k}':v for k,v in comparison_dict.items()}
+            comparison_dict = {f'{comparison}-{k}':v for k,v in comparison_dict.items()}
             comparison_df = pd.DataFrame.from_dict(comparison_dict, orient='index')
-#             column_to_add = column_to_add.append(comparison_df)
             column_to_add = pd.concat([column_to_add, comparison_df])
             
         column_to_add = column_to_add.rename({0:sample_name}, axis='columns')
@@ -105,19 +104,19 @@ def combine_gffcompare_res(gffcompare_stats_list):
 
     return df
 
-def get_matrix(large_df, metric):
-    
-    samples = list(large_df.columns)
-    res_df = pd.DataFrame(index=samples, columns=samples)
-    
-    for sample in samples:        
-        for i in range(len(samples)):
-            interesting_row = f'{sample}_vs_{samples[i]}_{metric}'
-            val = large_df.loc[interesting_row,sample]
-            res_df.loc[sample, samples[i]] = val
-            res_df = res_df[res_df.columns].astype(float)
-    
-    return res_df
+#def get_matrix(large_df, metric):
+#    
+#    samples = list(large_df.columns)
+#    res_df = pd.DataFrame(index=samples, columns=samples)
+#    
+#    for sample in samples:        
+#        for i in range(len(samples)):
+#            interesting_row = f'{sample}_vs_{samples[i]}_{metric}'
+#            val = large_df.loc[interesting_row,sample]
+#            res_df.loc[sample, samples[i]] = val
+#            res_df = res_df[res_df.columns].astype(float)
+#    
+#    return res_df
 
 
 def main():
@@ -128,15 +127,15 @@ def main():
     args = parser.parse_args()
 
     large_df = combine_gffcompare_res(args.gffcompare)
-    large_df.to_csv(f'{args.out_label}_extend.tsv', index_label='metric')
+    large_df.to_csv(f'{args.out_label}_extend.tsv', index_label='comparison')
     
-    for m in ['base_level_Se',
-              'base_level_Pr',
-              'transcript_level_Se',
-              'transcript_level_Pr']:
-        
-        metric_matrix = get_matrix(large_df, m)
-        metric_matrix.to_csv(f'{args.out_label}_{m}.csv')
+#    for m in ['base_level_Se',
+#              'base_level_Pr',
+#              'transcript_level_Se',
+#              'transcript_level_Pr']:
+#        
+#        metric_matrix = get_matrix(large_df, m)
+#        metric_matrix.to_csv(f'{args.out_label}_{m}.csv')
 
 
 if __name__ == "__main__":

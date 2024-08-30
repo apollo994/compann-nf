@@ -10,6 +10,7 @@ params.outputFolder = "./output_results"
 workflow {
 
 	def input_gff = Channel.fromPath(params.gff_folder + '/*.{gff,gff3}')
+    input_gff.view()
     
     // Create output structure
     MAKE_OUT_FOLDERS()
@@ -17,14 +18,12 @@ workflow {
 	// get general stats
 	GET_GFF_STATS(input_gff)
 
-	// run gff compare on genes containing CDS and with an 
-    // exon chain longer than >200bp
-    input_gff.view()
-	SELECT_CDS(input_gff)
-    FILTER_ISOFORM(SELECT_CDS.out)
-	KEEP_LONG_GENE(FILTER_ISOFORM.out)
-    GET_GFF_STATS_LONG(KEEP_LONG_GENE.out)
-	GFFCOMPARE(KEEP_LONG_GENE.out, KEEP_LONG_GENE.out.collect())
+	// run gff compare on genes with an exon chain longer than >200bp
+    FILTER_ISOFORM(input_gff)
+    KEEP_LONG_GENE(FILTER_ISOFORM.out)
+    SELECT_BASIC_STRUCTURE(KEEP_LONG_GENE.out)
+    GET_GFF_STATS_LONG(SELECT_BASIC_STRUCTURE.out)
+	GFFCOMPARE(SELECT_BASIC_STRUCTURE.out, SELECT_BASIC_STRUCTURE.out.collect())
 
 	// run BUSCO
 	EXTRACT_SEQ(input_gff, params.ref)
@@ -36,7 +35,6 @@ workflow {
 	AGGREGATE_GFF(GFFCOMPARE.out.collect())
 	AGGREGATE_BUSCO(RUN_BUSCO.out.collect())
     AGGREGATE_STATS(GET_GFF_STATS.out.collect(),GET_GFF_STATS_LONG.out.collect()) 
-
 
 
 }
@@ -83,7 +81,11 @@ process GET_GFF_STATS{
 }
 
 
-process SELECT_CDS{
+process SELECT_BASIC_STRUCTURE{
+
+    // This process is to keep only basic feature of the gene
+    // such as gene, mRNA and exon
+    // This might cause problem when mRNA is labeled as transcript
     
     cache 'lenient'
 
@@ -91,13 +93,14 @@ process SELECT_CDS{
 	path gff
 
 	output:
-	path "${gff.baseName}_CDS.gff3"
+	path "${gff.baseName}_basicelements.gff3"
 
 
 	script:
 	"""
-	awk '\$3 == "CDS" || \$3 == "gene" || \$3 == "mRNA" || \$3 == "exon"' ${gff} > ${gff.baseName}_CDS.gff3
-	"""
+	awk '\$3 == "gene" || \$3 == "mRNA" || \$3 == "exon"' ${gff} > ${gff.baseName}_basicelements.gff3
+    cut -f 3 ${gff.baseName}_basicelements.gff3 | sort | uniq -c # This is for debugging purpose
+    """
 }
 
 
@@ -117,8 +120,12 @@ process FILTER_ISOFORM{
 
 	script:
 	"""
-	agat_sp_keep_longest_isoform.pl -gff ${gff} -o ${gff.baseName}_longisoforms.gff3
-	"""
+	
+    cut -f 3 ${gff} | sort | uniq -c
+
+    agat_sp_keep_longest_isoform.pl -gff ${gff} -o ${gff.baseName}_longisoforms.gff3
+    cut -f 3 ${gff.baseName}_longisoforms.gff3 | sort | uniq -c # This is for debugging purpose 
+    """
 }
 
 process KEEP_LONG_GENE{

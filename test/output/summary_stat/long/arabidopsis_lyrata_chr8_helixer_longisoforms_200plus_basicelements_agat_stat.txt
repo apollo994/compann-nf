@@ -1,8 +1,5 @@
 Type (3rd column)	Number	Size total (kb)	Size mean (bp)	/!\Results are rounding to two decimal places 
-cds	18151	4298.30	236.81
 exon	19286	5472.62	283.76
-five_prime_utr	4438	455.48	102.63
 gene	3687	8173.71	2216.90
 mrna	3687	8173.71	2216.90
-three_prime_utr	4004	718.84	179.53
-Total	53253	27292.67	512.51
+Total	26660	21820.05	818.46
