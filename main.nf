@@ -234,14 +234,6 @@ process EXTRACT_SEQ{
 
 	script:
 	"""
-    #/*
-    #agat_sp_extract_sequences.pl \
-    #    -f ${ref} \
-    #    -g ${gff} \
-    #    -t CDS \
-    #    -p \
-    #    -o ${gff.baseName}_CDS.fa
-	#*/
 
     agat_sp_extract_sequences.pl \
         -f ${ref} \
