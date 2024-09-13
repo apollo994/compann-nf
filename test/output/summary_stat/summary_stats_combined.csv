@@ -1,4 +1,11 @@
 File Name,Full/200+,Type,Number,Size total (kb),Size mean (bp)
+arabidopsis_lyrata_chr8_helixer,Full,cds,18280,4307.62,235.65
+arabidopsis_lyrata_chr8_helixer,Full,exon,19436,5483.12,282.11
+arabidopsis_lyrata_chr8_helixer,Full,five_prime_utr,4511,456.06,101.1
+arabidopsis_lyrata_chr8_helixer,Full,gene,3753,8202.03,2185.46
+arabidopsis_lyrata_chr8_helixer,Full,mrna,3753,8202.03,2185.46
+arabidopsis_lyrata_chr8_helixer,Full,three_prime_utr,4079,719.44,176.38
+arabidopsis_lyrata_chr8_helixer,Full,Total,53812,27370.31,508.63
 arabidopsis_lyrata_chr8_REF,Full,cds,16761,3784.74,225.81
 arabidopsis_lyrata_chr8_REF,Full,chromosome,1,22951.29,22951293.0
 arabidopsis_lyrata_chr8_REF,Full,exon,18433,4162.2,225.8
@@ -13,13 +20,6 @@ arabidopsis_lyrata_chr8_REF,Full,snrna,21,2.95,140.29
 arabidopsis_lyrata_chr8_REF,Full,three_prime_utr,3096,225.3,72.77
 arabidopsis_lyrata_chr8_REF,Full,trna,34,2.56,75.24
 arabidopsis_lyrata_chr8_REF,Full,Total,48225,45578.01,945.11
-arabidopsis_lyrata_chr8_helixer,Full,cds,18280,4307.62,235.65
-arabidopsis_lyrata_chr8_helixer,Full,exon,19436,5483.12,282.11
-arabidopsis_lyrata_chr8_helixer,Full,five_prime_utr,4511,456.06,101.1
-arabidopsis_lyrata_chr8_helixer,Full,gene,3753,8202.03,2185.46
-arabidopsis_lyrata_chr8_helixer,Full,mrna,3753,8202.03,2185.46
-arabidopsis_lyrata_chr8_helixer,Full,three_prime_utr,4079,719.44,176.38
-arabidopsis_lyrata_chr8_helixer,Full,Total,53812,27370.31,508.63
 arabidopsis_lyrata_chr8_geneid,Full,cds,22013,6302.81,286.32
 arabidopsis_lyrata_chr8_geneid,Full,exon,22013,6302.81,286.32
 arabidopsis_lyrata_chr8_geneid,Full,gene,4976,13534.16,2719.89

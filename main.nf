@@ -230,17 +230,27 @@ process EXTRACT_SEQ{
 	path ref
 
 	output:
-	path "${gff.baseName}_CDS.fa"
+	path "${gff.baseName}_transcripts.fa"
 
 	script:
 	"""
+    #/*
+    #agat_sp_extract_sequences.pl \
+    #    -f ${ref} \
+    #    -g ${gff} \
+    #    -t CDS \
+    #    -p \
+    #    -o ${gff.baseName}_CDS.fa
+	#*/
+
     agat_sp_extract_sequences.pl \
         -f ${ref} \
         -g ${gff} \
-        -t CDS \
-        -p \
-        -o ${gff.baseName}_CDS.fa
-	"""
+        -t exon \
+        -o ${gff.baseName}_transcripts.fa \
+        --merge
+
+    """
 
 }
 
@@ -273,26 +283,25 @@ process	RUN_BUSCO{
     publishDir params.outputFolder , mode: 'copy'
 
 	input:
-	path prot
+	path transcripts
 	val lineage
 
 	output:
-	path "BUSCO/all_samples/short_summary.specific.${lineage.baseName}.BUSCO_${prot}.json"
+	path "BUSCO/all_samples/short_summary.specific.${lineage.baseName}.BUSCO_${transcripts}.json"
 	
 	script:
 	"""
-
 	busco \
-        -m protein \
-        -i ${prot} \
+        -m transcriptome \
+        -i ${transcripts} \
         -l ${lineage} \
         --offline \
         --cpu 4 \
-        -o BUSCO_${prot}
+        -o BUSCO_${transcripts}
 
 	mkdir -p BUSCO/all_samples
 	
-    mv BUSCO_${prot}/short_summary.specific.${lineage.baseName}.BUSCO_${prot}.json BUSCO/all_samples
+    mv BUSCO_${transcripts}/short_summary.specific.${lineage.baseName}.BUSCO_${transcripts}.json BUSCO/all_samples
 	"""
 
 }
