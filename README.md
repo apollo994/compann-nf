@@ -38,7 +38,8 @@ nextflow run main.nf \
     --lineage eudicots_odb10
 ```
 
-The test takes ~5 minutes to run on an M3 chip.   
+The test takes ~20 minutes to run on an M3 chip.
+Most of the time is taken by the CDS prediction perfomrmed by BUSCO. 
 The reference must be passed as absolute path, I'm working to fix this. 
 
 ## Modules
