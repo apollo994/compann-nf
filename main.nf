@@ -14,17 +14,20 @@ workflow {
     
     // Create output structure
     MAKE_OUT_FOLDERS()
-
+/*
 	// get general stats
 	GET_GFF_STATS(input_gff)
 
-	// run gff compare on genes with an exon chain longer than >200bp
+    // run gff compare on genes with an exon chain longer than >200bp
     FILTER_ISOFORM(input_gff)
     KEEP_LONG_GENE(FILTER_ISOFORM.out)
     SELECT_BASIC_STRUCTURE(KEEP_LONG_GENE.out)
     GET_GFF_STATS_LONG(SELECT_BASIC_STRUCTURE.out)
-	GFFCOMPARE(SELECT_BASIC_STRUCTURE.out, SELECT_BASIC_STRUCTURE.out.collect())
+    GFFCOMPARE(SELECT_BASIC_STRUCTURE.out, SELECT_BASIC_STRUCTURE.out)
+*/
 
+    GFFCOMPARE(input_gff, input_gff)
+/*
 	// run BUSCO
 	EXTRACT_SEQ(input_gff, params.ref)
     DW_BUSCO_LINEAGE(params.lineage)
@@ -35,7 +38,7 @@ workflow {
 	AGGREGATE_GFF(GFFCOMPARE.out.collect())
 	AGGREGATE_BUSCO(RUN_BUSCO.out.collect())
     AGGREGATE_STATS(GET_GFF_STATS.out.collect(),GET_GFF_STATS_LONG.out.collect()) 
-
+*/
 
 }
 
@@ -188,7 +191,8 @@ process GFFCOMPARE{
 
 	script:
 	"""
-	gffcompare -T -r ${ref} ${test.join(' ')} -o ${ref.baseName}
+    echo ${ref} ${test} > samples.txt
+	gffcompare -T -r ${ref} ${test} -o ${ref.baseName}
 	mkdir -p gffcompare/all_samples
 	cp ${ref.baseName}.stats gffcompare/all_samples
 	"""	
