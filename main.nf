@@ -14,7 +14,7 @@ workflow {
     
     // Create output structure
     MAKE_OUT_FOLDERS()
-/*
+
 	// get general stats
 	GET_GFF_STATS(input_gff)
 
@@ -23,11 +23,10 @@ workflow {
     KEEP_LONG_GENE(FILTER_ISOFORM.out)
     SELECT_BASIC_STRUCTURE(KEEP_LONG_GENE.out)
     GET_GFF_STATS_LONG(SELECT_BASIC_STRUCTURE.out)
-    GFFCOMPARE(SELECT_BASIC_STRUCTURE.out, SELECT_BASIC_STRUCTURE.out)
-*/
+    GFFCOMPARE(SELECT_BASIC_STRUCTURE.out, SELECT_BASIC_STRUCTURE.out.collect())
 
-    GFFCOMPARE(input_gff, input_gff)
-/*
+
+
 	// run BUSCO
 	EXTRACT_SEQ(input_gff, params.ref)
     DW_BUSCO_LINEAGE(params.lineage)
@@ -38,7 +37,7 @@ workflow {
 	AGGREGATE_GFF(GFFCOMPARE.out.collect())
 	AGGREGATE_BUSCO(RUN_BUSCO.out.collect())
     AGGREGATE_STATS(GET_GFF_STATS.out.collect(),GET_GFF_STATS_LONG.out.collect()) 
-*/
+
 
 }
 
@@ -101,7 +100,7 @@ process SELECT_BASIC_STRUCTURE{
 
 	script:
 	"""
-	awk '\$3 == "gene" || \$3 == "mRNA" || \$3 == "exon"' ${gff} > ${gff.baseName}_basicelements.gff3
+	awk '\$3 == "gene" || \$3 == "mRNA" || \$3 == "CDS"' ${gff} > ${gff.baseName}_basicelements.gff3
     cut -f 3 ${gff.baseName}_basicelements.gff3 | sort | uniq -c # This is for debugging purpose
     """
 }
@@ -192,7 +191,7 @@ process GFFCOMPARE{
 	script:
 	"""
     echo ${ref} ${test} > samples.txt
-	gffcompare -T -r ${ref} ${test} -o ${ref.baseName}
+    gffcompare -T -r ${ref} ${test.join(' ')} -o ${ref.baseName}
 	mkdir -p gffcompare/all_samples
 	cp ${ref.baseName}.stats gffcompare/all_samples
 	"""	
@@ -242,9 +241,9 @@ process EXTRACT_SEQ{
     agat_sp_extract_sequences.pl \
         -f ${ref} \
         -g ${gff} \
-        -t exon \
-        -o ${gff.baseName}_transcripts.fa \
-        --merge
+        -t CDS \
+        -p \
+        -o ${gff.baseName}_transcripts.fa
 
     """
 
@@ -288,7 +287,7 @@ process	RUN_BUSCO{
 	script:
 	"""
 	busco \
-        -m transcriptome \
+        -m proteins \
         -i ${transcripts} \
         -l ${lineage} \
         --offline \
