@@ -1,6 +1,6 @@
-include { AGGREGATE_GFF } from '../modules/aggregate_gff'
-include { AGGREGATE_BUSCO } from '../modules/aggregate_busco'
-include { AGGREGATE_STATS } from '../modules/aggregate_stats'
+include { AGGREGATE_GFF } from '../modules/aggregate_gff/main.nf'
+include { AGGREGATE_BUSCO } from '../modules/aggregate_busco/main.nf'
+include { AGGREGATE_STATS } from '../modules/aggregate_stats/main.nf'
 
 workflow RESULTS_AGGREGATION {
     take:

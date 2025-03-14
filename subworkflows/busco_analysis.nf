@@ -1,6 +1,6 @@
-include { EXTRACT_SEQ } from '../modules/extract_seq'
-include { DW_BUSCO_LINEAGE } from '../modules/dw_busco_lineage'
-include { RUN_BUSCO } from '../modules/run_busco'
+include { EXTRACT_SEQ } from '../modules/extract_seq/main.nf'
+include { DW_BUSCO_LINEAGE } from '../modules/dw_busco_lineage/main.nf'
+include { RUN_BUSCO } from '../modules/run_busco/main.nf'
 
 workflow BUSCO_ANALYSIS {
     take:
