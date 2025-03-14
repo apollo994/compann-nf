@@ -1,7 +1,7 @@
-include { SETUP } from '../subworkflows/setup'
-include { GFFCOMPARE } from '../subworkflows/gffcompare'
-include { BUSCO_ANALYSIS } from '../subworkflows/busco_analysis'
-include { RESULTS_AGGREGATION } from '../subworkflows/results_aggregation'
+include { SETUP } from '../subworkflows/setup.nf'
+include { STRUCTURE_ANALYSIS } from '../subworkflows/structure_analysis.nf'
+include { BUSCO_ANALYSIS } from '../subworkflows/busco_analysis.nf'
+include { RESULTS_AGGREGATION } from '../subworkflows/results_aggregation.nf'
 
 workflow MAIN_WORKFLOW {
     take:
@@ -12,7 +12,7 @@ workflow MAIN_WORKFLOW {
     main:
         SETUP()
 
-        GFFCOMPARE(input_gff)
+        STRUCTURE_ANALYSIS(input_gff)
 
         BUSCO_ANALYSIS(input_gff, ref, lineage)
 

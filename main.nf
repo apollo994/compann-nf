@@ -13,5 +13,5 @@ workflow {
     def input_gff = Channel.fromPath(params.gff_folder + '/*.{gff,gff3}')
     input_gff.view()
 
-    MAIN_WORKFLOW(input_gff, params.ref)
+    MAIN_WORKFLOW(input_gff, params.ref, params.lineage)
 }
