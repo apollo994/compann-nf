@@ -4,6 +4,6 @@ workflow SETUP {
     main:
         MAKE_OUT_FOLDERS()
     
-    emit:
-        folders = MAKE_OUT_FOLDERS.out
+//    emit:
+//        folders = MAKE_OUT_FOLDERS.out
 }

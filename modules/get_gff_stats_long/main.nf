@@ -11,12 +11,12 @@ process GET_GFF_STATS_LONG{
 	path gff
 	
 	output:
-	path "summary_stat/full/${gff.baseName}_agat_stat.txt"
+	path "summary_stat/long/${gff.baseName}_agat_stat.txt"
 
 	script:
 	"""
     mkdir -p summary_stat/long
-	agat_sq_stat_basic.pl -i ${gff} -o summary_stat/full/${gff.baseName}_agat_stat.txt
+	agat_sq_stat_basic.pl -i ${gff} -o summary_stat/long/${gff.baseName}_agat_stat.txt
 	"""
 
 

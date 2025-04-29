@@ -17,10 +17,10 @@ workflow MAIN_WORKFLOW {
         BUSCO_ANALYSIS(input_gff, ref, lineage)
 
         RESULTS_AGGREGATION(
-            GFFCOMPARE.out.gffcompare_results,
+            STRUCTURE_ANALYSIS.out.gffcompare_results,
             BUSCO_ANALYSIS.out.busco_results,
-            GFFCOMPARE.out.gff_stats,
-            GFFCOMPARE.out.gff_stats_long
+            STRUCTURE_ANALYSIS.out.gff_stats,
+            STRUCTURE_ANALYSIS.out.gff_stats_long
         )
 
     emit:
