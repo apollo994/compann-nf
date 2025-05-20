@@ -1,0 +1,24 @@
+include { GET_GFF_STATS } from '../modules/get_gff_stats/main.nf'
+include { FILTER_ISOFORM } from '../modules/filter_isoform/main.nf'
+include { KEEP_LONG_GENE } from '../modules/keep_long_gene/main.nf'
+include { SELECT_BASIC_STRUCTURE } from '../modules/select_basic_structure/main.nf'
+include { GET_GFF_STATS_LONG } from '../modules/get_gff_stats_long/main.nf'
+include { GFFCOMPARE } from '../modules/gffcompare/main.nf'
+
+workflow STRUCTURE_ANALYSIS {
+    take:
+        input_gff
+
+    main:
+        GET_GFF_STATS(input_gff)
+        FILTER_ISOFORM(input_gff)
+        KEEP_LONG_GENE(FILTER_ISOFORM.out)
+        SELECT_BASIC_STRUCTURE(KEEP_LONG_GENE.out)
+        GET_GFF_STATS_LONG(SELECT_BASIC_STRUCTURE.out)
+        GFFCOMPARE(SELECT_BASIC_STRUCTURE.out, SELECT_BASIC_STRUCTURE.out.collect())
+
+    emit:
+        gff_stats = GET_GFF_STATS.out
+        gff_stats_long = GET_GFF_STATS_LONG.out
+        gffcompare_results = GFFCOMPARE.out
+}

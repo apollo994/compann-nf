@@ -1,5 +1,6 @@
 work/
 .nextflow*
-i.DS_Store
+.DS_Store
 .ipynb_checkpoints
 .virtual_documents
+test/output/*
