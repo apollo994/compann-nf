@@ -15,7 +15,9 @@ workflow STRUCTURE_ANALYSIS {
         KEEP_LONG_GENE(FILTER_ISOFORM.out)
         SELECT_BASIC_STRUCTURE(KEEP_LONG_GENE.out)
         GET_GFF_STATS_LONG(SELECT_BASIC_STRUCTURE.out)
-        GFFCOMPARE(SELECT_BASIC_STRUCTURE.out, SELECT_BASIC_STRUCTURE.out.collect())
+        GFFCOMPARE(SELECT_BASIC_STRUCTURE.out
+                        .combine(SELECT_BASIC_STRUCTURE.out)
+                        .filter{it[0]!=it[1]})
 
     emit:
         gff_stats = GET_GFF_STATS.out
