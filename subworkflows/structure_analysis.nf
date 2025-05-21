@@ -17,10 +17,9 @@ workflow STRUCTURE_ANALYSIS {
         GET_GFF_STATS_LONG(SELECT_BASIC_STRUCTURE.out)
 
         // make every pairs of gff and exclude self pairs
-        SELECT_BASIC_STRUCTURE.out 
+        ch_structure_pairs = SELECT_BASIC_STRUCTURE.out 
                         .combine(SELECT_BASIC_STRUCTURE.out)
                         .filter{it[0]!=it[1]}
-                        .set(ch_structure_pairs)
         GFFCOMPARE(ch_structure_pairs)
 
     emit:
