@@ -3,8 +3,10 @@ import argparse
 
 def get_samples_dictionary(file_path):
 
-    ref = file_path.split('/')[-1].split('_VS_')[0].replace('_longisoforms_200plus_basicelements','')
-    query = file_path.split('/')[-1].split('_VS_')[1].replace('_longisoforms_200plus_basicelements.stats','')
+    # ref = file_path.split('/')[-1].split('_VS_')[0].replace('_longisoforms_200plus_basicelements','')
+    # query = file_path.split('/')[-1].split('_VS_')[1].replace('_longisoforms_200plus_basicelements.stats','')
+    ref = file_path.split('/')[-1].split('_VS_')[0].replace('_longisoforms_basicelements','')
+    query = file_path.split('/')[-1].split('_VS_')[1].replace('_longisoforms_basicelements.stats','')
     sample = f'{ref}_VS_{query}'
 
     res_dict = {'comparison': sample ,'ref':ref, 'query':query}

@@ -15,7 +15,7 @@ process SELECT_BASIC_STRUCTURE{
 
 	script:
 	"""
-	awk '\$3 == "gene" || \$3 == "mRNA" || \$3 == "CDS"' ${gff} > ${gff.baseName}_basicelements.gff3
+	awk '\$3 == "gene" || \$3 == "mRNA" || \$3 == "exon" || \$3 == "CDS"' ${gff} > ${gff.baseName}_basicelements.gff3
     cut -f 3 ${gff.baseName}_basicelements.gff3 | sort | uniq -c # This is for debugging purpose
     """
 }

@@ -1,4 +1,4 @@
-process KEEP_LONG_GENE{
+process KEEP_SHORT_GENE{
 	
     cache 'lenient'
     label 'agat'
@@ -8,14 +8,14 @@ process KEEP_LONG_GENE{
 	
 	input:
 	path gff
-    val min
+    val max
 
 	output:
-	path "${gff.baseName}_{min}toINF.gff3"
+	path "${gff.baseName}_0to${max}.gff3"
 
 	script:
 	"""
-    agat_sp_filter_gene_by_length.pl -gff ${gff} --size min --test ">=" -o  ${gff.baseName}_{min}toINF.gff3
+    agat_sp_filter_gene_by_length.pl -gff ${gff} --size $max --test "<" -o  ${gff.baseName}_0to${max}.gff3
 	"""	
 
 }
