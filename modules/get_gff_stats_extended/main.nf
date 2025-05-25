@@ -12,7 +12,9 @@ process GET_GFF_STATS_EXTENDED{
     path ref
 	
 	output:
-    tuple path("summary_stat/extended/${gff.baseName}_agat_extended.txt"), path("summary_stat/extended/${gff.baseName}_agat_extended.txt_raw_data")
+    tuple path(gff),
+          path("summary_stat/extended/${gff.baseName}_agat_extended.txt"),
+          path("summary_stat/extended/${gff.baseName}_agat_extended.txt_raw_data")
 	
     script:
 	"""

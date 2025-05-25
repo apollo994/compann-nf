@@ -1,4 +1,5 @@
 include { SETUP } from '../subworkflows/setup.nf'
+include { SUMMARY_STATS } from '../subworkflows/summary_stats.nf'
 include { STRUCTURE_ANALYSIS } from '../subworkflows/structure_analysis.nf'
 include { BUSCO_ANALYSIS } from '../subworkflows/busco_analysis.nf'
 include { RESULTS_AGGREGATION } from '../subworkflows/results_aggregation.nf'
@@ -11,6 +12,8 @@ workflow MAIN_WORKFLOW {
 
     main:
         SETUP()
+
+        SUMMARY_STATS(input_gff, ref)
 
         STRUCTURE_ANALYSIS(input_gff)
 
