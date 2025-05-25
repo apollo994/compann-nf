@@ -6,16 +6,22 @@ workflow RESULTS_AGGREGATION {
     take:
         gffcompare_results
         busco_results
-        gff_stats
-        gff_stats_long
 
     main:
-        AGGREGATE_GFF(gffcompare_results.collect())
-        AGGREGATE_BUSCO(busco_results.collect())
-        AGGREGATE_STATS(gff_stats.collect(), gff_stats_long.collect())
+        
+       // labelALL_gffcompare = gffcompare_results
+       //                         .collect()
+       //                         .map{ x -> tuple(x, "ALL") }
 
-    emit:
-        aggregated_gff = AGGREGATE_GFF.out
-        aggregated_busco = AGGREGATE_BUSCO.out
-        aggregated_stats = AGGREGATE_STATS.out
+       // grouped_segments = gffcompare_results_seg
+       //                     .groupTuple(by: 1)
+       // 
+       // merged_gffcompare = labelALL_gffcompare.mix(grouped_segments)
+        
+
+        AGGREGATE_GFF(gffcompare_results.groupTuple(by: 1))
+
+
+        AGGREGATE_BUSCO(busco_results.collect())
+
 }

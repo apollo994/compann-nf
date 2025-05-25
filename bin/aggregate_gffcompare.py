@@ -3,10 +3,8 @@ import argparse
 
 def get_samples_dictionary(file_path):
 
-    # ref = file_path.split('/')[-1].split('_VS_')[0].replace('_longisoforms_200plus_basicelements','')
-    # query = file_path.split('/')[-1].split('_VS_')[1].replace('_longisoforms_200plus_basicelements.stats','')
-    ref = file_path.split('/')[-1].split('_VS_')[0].replace('_longisoforms_basicelements','')
-    query = file_path.split('/')[-1].split('_VS_')[1].replace('_longisoforms_basicelements.stats','')
+    ref = file_path.split('/')[-1].split('_VS_')[0]
+    query = file_path.split('/')[-1].split('_VS_')[1].replace('.stats','')
     sample = f'{ref}_VS_{query}'
 
     res_dict = {'comparison': sample ,'ref':ref, 'query':query}
@@ -87,7 +85,7 @@ def calculate_f1(precision, recall):
 def main():
     parser = argparse.ArgumentParser(description='My nice tool.')
     parser.add_argument('--gffcompare', nargs='+', help='A list of *.stats file from gffcompare')
-    parser.add_argument('--out_label', help='Name for the output csv')
+    parser.add_argument('--out_label',default='gff_res.tsv', help='Name for the output csv')
 
     args = parser.parse_args()
     
@@ -128,7 +126,7 @@ def main():
                                      ,'novel_exon_perc'])
 
     
-    res_df.to_csv(f'{args.out_label}_extend.tsv', index=False)
+    res_df.to_csv(f'{args.out_label}', index=False)
 
 
 if __name__ == "__main__":

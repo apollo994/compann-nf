@@ -15,19 +15,13 @@ workflow MAIN_WORKFLOW {
 
         SUMMARY_STATS(input_gff, ref)
 
-        STRUCTURE_ANALYSIS(input_gff)
+        STRUCTURE_ANALYSIS(input_gff, SUMMARY_STATS.out.gff_segments)
 
         BUSCO_ANALYSIS(input_gff, ref, lineage)
 
         RESULTS_AGGREGATION(
             STRUCTURE_ANALYSIS.out.gffcompare_results,
             BUSCO_ANALYSIS.out.busco_results,
-            STRUCTURE_ANALYSIS.out.gff_stats,
-            STRUCTURE_ANALYSIS.out.gff_stats_long
         )
 
-    emit:
-        aggregated_gff = RESULTS_AGGREGATION.out.aggregated_gff
-        aggregated_busco = RESULTS_AGGREGATION.out.aggregated_busco
-        aggregated_stats = RESULTS_AGGREGATION.out.aggregated_stats
 }

@@ -25,7 +25,7 @@ workflow SUMMARY_STATS {
 
     emit:
         gff_extended_stats = GET_GFF_STATS_EXTENDED.out
-        gff_segmented_ministats = GET_GFF_MINISTATS.out
+        gff_mini_stats = GET_GFF_MINISTATS.out
         gff_segments = SEGMENT_ANNOTATION.out 
 
 }
