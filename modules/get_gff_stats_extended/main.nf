@@ -12,7 +12,7 @@ process GET_GFF_STATS_EXTENDED{
     path ref
 	
 	output:
-    tuple path(gff),
+    tuple path("${gff.baseName}_longest_isoform.gff"),
           path("summary_stat/extended/${gff.baseName}_agat_extended.txt"),
           path("summary_stat/extended/${gff.baseName}_agat_extended.txt_raw_data")
 	
@@ -26,6 +26,9 @@ process GET_GFF_STATS_EXTENDED{
                           -r \
                           -g ${ref} \
                           -o summary_stat/extended/${gff.baseName}_agat_extended.txt
+    
+    agat_sp_keep_longest_isoform.pl --gff ${gff.baseName}_with_introns.gff \
+                           -o ${gff.baseName}_longest_isoform.gff
 	"""
 
 }

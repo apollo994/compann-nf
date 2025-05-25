@@ -17,11 +17,11 @@ process GET_GFF_MINISTATS{
 	"""
     mkdir -p summary_stat/mini/from${from}_to${to}
 
-    agat_sp_keep_longest_isoform.pl --gff ${gff} \
-                           -o ${gff.baseName}_longest_isoform.gff
+    #agat_sp_keep_longest_isoform.pl --gff ${gff} \
+    #                       -o ${gff.baseName}_longest_isoform.gff
     
     bash extract_features.sh  \
-            ${gff.baseName}_longest_isoform.gff \
+            ${gff} \
             ${ref} \
             > summary_stat/mini/from${from}_to${to}/${gff.baseName}_ministast.tsv 
 
