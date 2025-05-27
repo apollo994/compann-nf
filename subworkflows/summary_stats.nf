@@ -20,12 +20,16 @@ workflow SUMMARY_STATS {
         segment_input = GET_GFF_STATS_EXTENDED.out.combine(segments)
 
         SEGMENT_ANNOTATION(segment_input)
-        
         GET_GFF_MINISTATS(SEGMENT_ANNOTATION.out, ref)
+
+        // collect ministats frol all generated in GET_GFF_STATS_EXTENDED
+        all_ministats = GET_GFF_STATS_EXTENDED.out
+                              .map({it[3]})
+                              .concat(GET_GFF_MINISTATS.out)
 
     emit:
         gff_extended_stats = GET_GFF_STATS_EXTENDED.out
-        gff_mini_stats = GET_GFF_MINISTATS.out
+        gff_mini_stats = all_ministats
         gff_segments = SEGMENT_ANNOTATION.out 
 
 }

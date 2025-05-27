@@ -14,9 +14,12 @@ process AGGREGATE_GFF{
     script:
     """
     mkdir -p gffcompare/
+    
     python ${baseDir}/bin/aggregate_gffcompare.py \
         --gffcompare ${gff_stats.join(' ')} \
         --out_label gffcompare/combined_gffcompare_${group}.tsv
+
     """
+
 
 }

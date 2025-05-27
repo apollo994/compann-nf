@@ -16,10 +16,6 @@ process FILTER_ISOFORM{
 
 	script:
 	"""
-	
-    cut -f 3 ${gff} | sort | uniq -c
-
     agat_sp_keep_longest_isoform.pl -gff ${gff} -o ${gff.baseName}_longisoforms.gff3
-    cut -f 3 ${gff.baseName}_longisoforms.gff3 | sort | uniq -c # This is for debugging purpose 
     """
 }

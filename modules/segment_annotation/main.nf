@@ -4,11 +4,16 @@ process SEGMENT_ANNOTATION{
 	label 'agat'
 
 	input:
-	tuple path(gff), path(ext_stats), path(raw_data), val(from), val(to)
+	tuple path(gff),
+          path(ext_stats),
+          path(raw_data),
+          path(mini_stats),
+          val(from),
+          val(to)
 
     output:
 	tuple path("${gff.baseName}_from${from}_to${to}.gff3"),
-          val(from) , val(to),
+          // val(from) , val(to),
           val("from${from}_to${to}")
 
 	script:

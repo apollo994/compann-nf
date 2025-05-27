@@ -13,8 +13,10 @@ workflow STRUCTURE_ANALYSIS {
                         .combine(channel.of("ALL"))
         
         gff_pairs_seg = gff_segments
-            .groupTuple(by: 3)
-            .flatMap { filesBag, froms, tos, label ->
+            //.groupTuple(by: 3)
+            //.flatMap { filesBag, froms, tos, label ->
+            .groupTuple(by: 1)
+            .flatMap { filesBag, label ->
         
                 def files = filesBag as List               // still need a list here
         

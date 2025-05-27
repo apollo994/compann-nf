@@ -4,23 +4,15 @@ include { AGGREGATE_STATS } from '../modules/aggregate_stats/main.nf'
 
 workflow RESULTS_AGGREGATION {
     take:
+        gff_ministats
         gffcompare_results
         busco_results
 
     main:
         
-       // labelALL_gffcompare = gffcompare_results
-       //                         .collect()
-       //                         .map{ x -> tuple(x, "ALL") }
-
-       // grouped_segments = gffcompare_results_seg
-       //                     .groupTuple(by: 1)
-       // 
-       // merged_gffcompare = labelALL_gffcompare.mix(grouped_segments)
-        
+        AGGREGATE_STATS(gff_ministats.collect())
 
         AGGREGATE_GFF(gffcompare_results.groupTuple(by: 1))
-
 
         AGGREGATE_BUSCO(busco_results.collect())
 

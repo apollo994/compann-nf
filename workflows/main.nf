@@ -20,6 +20,7 @@ workflow MAIN_WORKFLOW {
         BUSCO_ANALYSIS(input_gff, ref, lineage)
 
         RESULTS_AGGREGATION(
+            SUMMARY_STATS.out.gff_mini_stats,
             STRUCTURE_ANALYSIS.out.gffcompare_results,
             BUSCO_ANALYSIS.out.busco_results,
         )
