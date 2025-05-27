@@ -4,18 +4,16 @@ include { AGGREGATE_STATS } from '../modules/aggregate_stats/main.nf'
 
 workflow RESULTS_AGGREGATION {
     take:
+        gff_ministats
         gffcompare_results
         busco_results
-        gff_stats
-        gff_stats_long
 
     main:
-        AGGREGATE_GFF(gffcompare_results.collect())
-        AGGREGATE_BUSCO(busco_results.collect())
-        AGGREGATE_STATS(gff_stats.collect(), gff_stats_long.collect())
+        
+        AGGREGATE_STATS(gff_ministats.collect())
 
-    emit:
-        aggregated_gff = AGGREGATE_GFF.out
-        aggregated_busco = AGGREGATE_BUSCO.out
-        aggregated_stats = AGGREGATE_STATS.out
+        AGGREGATE_GFF(gffcompare_results.groupTuple(by: 1))
+
+        AGGREGATE_BUSCO(busco_results.collect())
+
 }

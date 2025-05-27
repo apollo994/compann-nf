@@ -6,18 +6,20 @@ process AGGREGATE_GFF{
     publishDir params.outputFolder , mode: 'copy'
 
     input:
-    val gff_stats
+    tuple val(gff_stats), val(group)
     
     output:
-	path "gffcompare/summary/*"
+	path "gffcompare/combined_gffcompare_${group}.tsv"
     
     script:
     """
-    mkdir -p gffcompare/summary
-    hostname     
+    mkdir -p gffcompare/
+    
     python ${baseDir}/bin/aggregate_gffcompare.py \
         --gffcompare ${gff_stats.join(' ')} \
-        --out_label gffcompare/summary/combined_gffcompare
+        --out_label gffcompare/combined_gffcompare_${group}.tsv
+
     """
+
 
 }

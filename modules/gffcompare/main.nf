@@ -7,18 +7,17 @@ process GFFCOMPARE{
 	publishDir params.outputFolder	, mode: 'copy'
 
 	input:
-	// path ref
-	// val test
-    tuple path(ref), path(test)
+    tuple path(ref), path(test), val(segment)
 	
 	output:
-	path "gffcompare/all_samples/${ref.baseName}_VS_${test.baseName}.stats"	
+	tuple path("gffcompare/${segment}/${ref.baseName}_VS_${test.baseName}.stats"),
+          val(segment)
 
 	script:
 	"""
     gffcompare -T -r ${ref} ${test}
-	mkdir -p gffcompare/all_samples
-    mv gffcmp.stats gffcompare/all_samples/${ref.baseName}_VS_${test.baseName}.stats
+	mkdir -p gffcompare/${segment}
+    mv gffcmp.stats gffcompare/${segment}/${ref.baseName}_VS_${test.baseName}.stats
 	"""	
 
 }
