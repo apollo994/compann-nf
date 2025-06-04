@@ -9,11 +9,7 @@ workflow RESULTS_AGGREGATION {
         busco_results
 
     main:
-        
         AGGREGATE_STATS(gff_ministats.collect())
-
         AGGREGATE_GFF(gffcompare_results.groupTuple(by: 1))
-
         AGGREGATE_BUSCO(busco_results.collect())
-
 }
