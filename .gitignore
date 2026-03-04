@@ -4,3 +4,4 @@ work/
 .ipynb_checkpoints
 .virtual_documents
 test/output/*
+notebook/
